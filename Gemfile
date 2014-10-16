@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.1.6'
+gem 'will_paginate'
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass'
 gem 'sass-rails', '~> 4.0.3'

@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
   root to: 'pages#index'
-  get 'album' => 'pages#album'
+
+  resources :albums do
+    resources :songs
+  end
 end
