@@ -1,19 +1,25 @@
 <% content_for :body_class, 'collection' %>
 
 <div class="collection-container container">
-  <div class='row'>
-    <div class="collection-album-container col-md-2">
-      <%= image_tag "album-placeholder.png" %>
-      <div class="collection-album-info caption">
-        <p>
-          <a class="album-name" href="#"> The Colours </a>
-          <br/>
-          <a href="#"> Pablo Picasso </a>
-          <br/>
-          X songs
-          <br/>
-        </p>
-      </div>
+  <% @albums.in_groups_of(6, false).each do |row| %>
+    <div class='row'>
+      <% row.each do |album| %>
+        <div class="collection-album-container col-md-2">
+          <%= image_tag "album-placeholder.png" %>
+          <div class="collection-album-info caption">
+            <p>
+              <%= link_to album.title, album_path(album), class: 'album-name' %></a>
+              <br/>
+              <%= link_to album.author, album_path(album)%> </a>
+              <br/>
+              <%= album.songs.count %>
+              <br/>
+            </p>
+          </div>
+        </div>
+      <% end %>
     </div>
-  </div>
+  <% end %>
+
+  <% will_paginate @albums %>
 </div>

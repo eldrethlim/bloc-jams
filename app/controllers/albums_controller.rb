@@ -2,7 +2,7 @@ class AlbumsController < ApplicationController
   before_action :set_album, except: [:index]
   
   def index
-    #@albums = Album.order("created_at DESC").paginate(page: params[:page], per_page: 10)
+    @albums = Album.order("created_at DESC").paginate(page: params[:page], per_page: 10)
   end
 
   def show
