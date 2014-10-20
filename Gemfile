@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.1.6'
-gem 'will_paginate'
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass'
 gem 'sass-rails', '~> 4.0.3'
@@ -11,6 +10,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
+gem 'active_model_serializers'
 
 group :development, :test do
   gem 'rspec-rails'

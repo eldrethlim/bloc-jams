@@ -4,4 +4,9 @@ Rails.application.routes.draw do
   resources :albums do
     resources :songs
   end
+
+  namespace :api do
+    resources :albums
+  end
+  
 end
