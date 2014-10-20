@@ -26,6 +26,7 @@ group :development do
   gem 'sqlite3'
   gem 'quiet_assets'
   gem 'spring'
+  gem 'faker'
 end
 
 group :production do

@@ -5,3 +5,22 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+require 'faker'
+
+20.times do
+  Album.create!(
+    title: Faker::Lorem.sentence(3),
+    author: Faker::Name.name,
+    description: Faker::Lorem.sentence(3)
+  )
+end
+albums = Album.all
+
+100.times do
+  Song.create!(
+    album: albums.sample,
+    title: Faker::Lorem.sentence(3),
+    number: Faker::Number.digit,
+    duration: Faker::Number.digit
+  )
+end
