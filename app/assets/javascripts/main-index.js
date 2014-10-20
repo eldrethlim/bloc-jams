@@ -32,17 +32,16 @@ $(document).ready(function() {
     $(this).css("color", "#d49a9a");
   };
 
-  var offHoverAction = function(event) {
-    if ($(this).hasClass("point")) {
+  var lowerTopMargin = function(event) {
       $(this).animate({'margin-top': '0px'});
-    }
-    else if ($(this).has("h3")) {
-      $(this).css("color", "white");
-    }
   };
 
-  $('.selling-points .point').hover(raiseTopMargin, offHoverAction);
-  $('.hero-content h3').hover(changeColorToPink, offHoverAction);
+  var backToWhite = function(event) {
+      $(this).css("color", "white");
+  };
+
+  $('.selling-points .point').hover(raiseTopMargin, lowerTopMargin);
+  $('.hero-content h3').hover(changeColorToPink, backToWhite);
   $('.hero-content h3').click(exclamationMark);
   $('.selling-points .point').click(enlargeText);
   $('.hero-content h1').click(fadingHeader);
