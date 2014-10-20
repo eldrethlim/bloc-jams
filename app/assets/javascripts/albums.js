@@ -1,8 +1,9 @@
 var countTotalTime = function(songs) {
   var total = 0;
-  for (i = 0; i < songs.length; i++) {
-    total += songs[i].duration;
+  function totalTime(element) {
+    total += element.duration;
   }
+  songs.forEach(totalTime);
   var minutes = Math.floor(total/60);
   var seconds = total - minutes * 60;
 
@@ -10,6 +11,9 @@ var countTotalTime = function(songs) {
 };
 
 var buildAlbumThumbnail = function(album) {
+
+  var albumTotalTime = countTotalTime(album.songs);
+
   var template =
       '<div class="collection-album-container col-md-2">'
     + '  <img src="/assets/album-placeholder.png"/>'
@@ -21,7 +25,7 @@ var buildAlbumThumbnail = function(album) {
     + '      <br/>'
     + '      ' + album.songs.length + ' songs'
     + '      <br/>'
-    + '      ' + countTotalTime(album.songs) + ' total length.'
+    + '      ' + albumTotalTime + ' total length.'
     + '      <br/>'
     + '    </p>'
     + '  </div>'
