@@ -2,7 +2,7 @@ $(document).ready(function() {
 
   var onClickAction = function(event) {
     if ($(this).is('#fading-header')) {
-      $(this).fadeOut("slow").delay(300).fadeIn("slow");
+      $(this).fadeOut("slow").fadeIn("slow");
     }
     else if ($(this).is("#turn-it-up")) {
       subText = $(this).text();
