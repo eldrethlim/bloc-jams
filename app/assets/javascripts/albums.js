@@ -36,19 +36,20 @@ var buildAlbumThumbnail = function(album) {
 };
 
 function intializeAlbumsView() {
-  $.getJSON('/api/albums.json', function(json) {
-  var $collection = $(".collection-container .row");
-  $collection.empty();
+  if (document.URL.match(/\/albums/)) {
+    $.getJSON('/api/albums.json', function(json) {
+      var $collection = $(".collection-container .row");
+      $collection.empty();
 
-  for (i = 0; i < json.albums.length; i++) {
-    var album = json.albums[i];
-    var $newThumbnail = buildAlbumThumbnail(album);
-    $collection.append($newThumbnail);
+      for (i = 0; i < json.albums.length; i++) {
+        var album = json.albums[i];
+        var $newThumbnail = buildAlbumThumbnail(album);
+        $collection.append($newThumbnail);
+      }
+    });
   }
-});
 }
 
-if (document.URL.match(/\/albums/)) {
-  $(document).ready(intializeAlbumsView);
-  $(document).on('page:load', intializeAlbumsView);
-}
+
+$(document).ready(intializeAlbumsView);
+$(document).on('page:load', intializeAlbumsView);

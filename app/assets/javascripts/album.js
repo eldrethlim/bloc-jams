@@ -32,13 +32,14 @@ var setAlbumView = function(album) {
 };
 
 function intializeAlbumView() {
-  var id = document.URL.split('/').slice(-1);
-  $.getJSON('/api/albums/' + id + '.json', function(json) {
-    setAlbumView(json.album);
-  });
+
+  if (document.URL.match(/\/albums\/\d+/)) {
+    var id = document.URL.split('/').slice(-1);
+    $.getJSON('/api/albums/' + id + '.json', function(json) {
+      setAlbumView(json.album);
+    });
+  }
 }
 
-if (document.URL.match(/\/albums\/\d+/)) {
- $(document).ready(intializeAlbumView);
- $(document).on('page:load', intializeAlbumView);
-}
+$(document).ready(intializeAlbumView);
+$(document).on('page:load', intializeAlbumView);
