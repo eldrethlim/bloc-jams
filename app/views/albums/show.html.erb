@@ -7,22 +7,15 @@
     </div>
 
     <div class='album-information col-md-8 col-md-push-1'>
-      <h3> <%= @album.title %></h3>
-      <h4> <%= @album.author %></h4>
-      <h5> <%= @album.description %></h5>
+      <h3 class='album-title'></h3>
+      <h4 class='album-author'></h4>
+      <h5 class='album-meta-info'></h5>
     </div>
   </div>
 
 
   <div class='row'> <!-- Song table -->
     <table class='album-song-listing table'>
-      <% @songs.each do |song| %>
-        <tr>
-          <td class='col-md-1'> <%= song.number %></td>
-          <td class='col-md-9'> <%= song.title %></td>
-          <td class='col-md-2'> <%= song.duration %></td>
-        </tr>
-      <% end %>
     </table>
   </div>
 </div>

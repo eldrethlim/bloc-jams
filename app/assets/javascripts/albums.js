@@ -1,5 +1,6 @@
 var countTotalTime = function(songs) {
   var total = 0;
+  
   function totalTime(element) {
     total += element.duration;
   }
@@ -49,5 +50,3 @@ if (document.URL.match(/\/albums/)) {
     });
   });
 }
-
-// model stores value in seconds, conver to minutes and seconds in javascript - display total
