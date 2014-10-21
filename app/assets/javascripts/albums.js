@@ -1,14 +1,18 @@
 var countTotalTime = function(songs) {
   var total = 0;
   
-  function totalTime(element) {
+  songs.forEach(function (element) {
     total += element.duration;
-  }
-  songs.forEach(totalTime);
+  });
   var minutes = Math.floor(total/60);
   var seconds = total - minutes * 60;
 
-  return minutes + ':' + seconds;
+  if (seconds < 10) {
+    return minutes + ':0' + seconds;
+  }
+  else {
+    return minutes + ':' + seconds;
+  }
 };
 
 var buildAlbumThumbnail = function(album) {
@@ -17,7 +21,9 @@ var buildAlbumThumbnail = function(album) {
 
   var template =
       '<div class="collection-album-container col-md-2">'
-    + '  <img src="/assets/album-placeholder.png"/>'
+    + '  <div class="collection-album-image-container">'
+    + '    <img src="/assets/album-placeholder.png"/>'
+    + '  </div>'
     + '  <div class="caption album-collection-info">'
     + '    <p>'
     + '      <a class="album-name" href="/albums/' + album.id + '">' + album.title + '</a>'
@@ -26,13 +32,34 @@ var buildAlbumThumbnail = function(album) {
     + '      <br/>'
     + '      ' + album.songs.length + ' songs'
     + '      <br/>'
-    + '      ' + albumTotalTime + ' total length.'
+    + '      <p class="css-after-test">' + albumTotalTime + '</p>'
     + '      <br/>'
     + '    </p>'
     + '  </div>'
     + '</div>';
 
  return $(template);
+};
+
+var buildAlbumOverlay = function(albumURL) {
+  var template =
+    '<div class="collection-album-image-overlay">'
+   +'  <div class="collection-overlay-content">'
+   +'    <a class="collection-overlay-button" href="' + albumURL + '">'
+   +'      <i class="fa fa-play"></i>'
+   +'    </a>'
+   +'    &nbsp;'
+   +'    <a class="collection-overlay-button">'
+   +'      <i class="fa fa-plus"></i>'
+   +'    </a>'
+   +'    &nbsp;'
+   +'    <a class="collection-overlay-button">'
+   +'      <i class="fa fa-share"></i>'
+   +'    </a>'
+   +'  </div>'
+   +'</div>';
+
+  return $(template);
 };
 
 function intializeAlbumsView() {
@@ -46,10 +73,18 @@ function intializeAlbumsView() {
         var $newThumbnail = buildAlbumThumbnail(album);
         $collection.append($newThumbnail);
       }
+
+      var onHover = function(event) {
+        $(this).append(buildAlbumOverlay("/album.html"));
+      };
+
+      var offHover = function(event) {
+        $(this).find('.collection-album-image-overlay').remove();
+      };
+
+      $collection.find('.collection-album-image-container').hover(onHover, offHover);
     });
   }
 }
 
-
 $(document).ready(intializeAlbumsView);
-$(document).on('page:load', intializeAlbumsView);

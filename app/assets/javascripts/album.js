@@ -42,4 +42,3 @@ function intializeAlbumView() {
 }
 
 $(document).ready(intializeAlbumView);
-$(document).on('page:load', intializeAlbumView);
