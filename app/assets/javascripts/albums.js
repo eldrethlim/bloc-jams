@@ -21,7 +21,7 @@ var buildAlbumThumbnail = function(album) {
 
   var template =
       '<div class="collection-album-container col-md-2">'
-    + '  <div class="collection-album-image-container">'
+    + '  <div id="' + album.id + '" class="collection-album-image-container">'
     + '    <img src="/assets/album-placeholder.png"/>'
     + '  </div>'
     + '  <div class="caption album-collection-info">'
@@ -41,11 +41,12 @@ var buildAlbumThumbnail = function(album) {
  return $(template);
 };
 
-var buildAlbumOverlay = function(albumURL) {
+var buildAlbumOverlay = function(id) {
+
   var template =
     '<div class="collection-album-image-overlay">'
    +'  <div class="collection-overlay-content">'
-   +'    <a class="collection-overlay-button" href="' + albumURL + '">'
+   +'    <a class="collection-overlay-button" href="/albums/' + id + '">'
    +'      <i class="fa fa-play"></i>'
    +'    </a>'
    +'    &nbsp;'
@@ -74,11 +75,12 @@ function intializeAlbumsView() {
         $collection.append($newThumbnail);
       }
 
-      var onHover = function(event) {
-        $(this).append(buildAlbumOverlay("/album.html"));
+      var onHover = function() {
+        var id = $(this).attr('id');
+        $(this).append(buildAlbumOverlay(id));
       };
 
-      var offHover = function(event) {
+      var offHover = function() {
         $(this).find('.collection-album-image-overlay').remove();
       };
 
@@ -88,3 +90,4 @@ function intializeAlbumsView() {
 }
 
 $(document).ready(intializeAlbumsView);
+$(document).on('page:load', intializeAlbumsView);

@@ -1,15 +1,15 @@
 $(document).ready(function() {
 
-  var exclamationMark = function(event) {
+  var exclamationMark = function() {
       subText = $(this).text();
       $(this).text(subText + "!");
   };
 
-  var fadingHeader = function(event) {
+  var fadingHeader = function() {
     $(this).fadeOut("slow").fadeIn("slow");
   };
 
-  var enlargeText = function(event) {
+  var enlargeText = function() {
     if ($(this).hasClass('enlarged-text')) 
     {
         $(this).removeClass('enlarged-text')
@@ -32,11 +32,11 @@ $(document).ready(function() {
     $(this).css("color", "#d49a9a");
   };
 
-  var lowerTopMargin = function(event) {
+  var lowerTopMargin = function() {
       $(this).animate({'margin-top': '0px'});
   };
 
-  var backToWhite = function(event) {
+  var backToWhite = function() {
       $(this).css("color", "white");
   };
 
