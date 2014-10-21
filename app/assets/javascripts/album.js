@@ -20,8 +20,8 @@ var setAlbumView = function(album) {
     var $albumAuthor = $('.album-author');
     $albumAuthor.text(album.author);
 
-    var $albumMeta = $('album-meta-info');
-    $albumMeta.text(album.description);
+    var $albumDescription = $('.album-description');
+    $albumDescription.text(album.description);
 
     var songs = album.songs;
     function createSongRows(song) {
@@ -31,11 +31,14 @@ var setAlbumView = function(album) {
     songs.forEach(createSongRows);
 };
 
-if (document.URL.match(/\/albums\/\d+/)) {
- $(document).ready(function() {
+function intializeAlbumView() {
   var id = document.URL.split('/').slice(-1);
   $.getJSON('/api/albums/' + id + '.json', function(json) {
     setAlbumView(json.album);
   });
- });
+}
+
+if (document.URL.match(/\/albums\/\d+/)) {
+ $(document).ready(intializeAlbumView);
+ $(document).on('page:load', intializeAlbumView);
 }

@@ -35,18 +35,20 @@ var buildAlbumThumbnail = function(album) {
  return $(template);
 };
 
+function intializeAlbumsView() {
+  $.getJSON('/api/albums.json', function(json) {
+  var $collection = $(".collection-container .row");
+  $collection.empty();
+
+  for (i = 0; i < json.albums.length; i++) {
+    var album = json.albums[i];
+    var $newThumbnail = buildAlbumThumbnail(album);
+    $collection.append($newThumbnail);
+  }
+});
+}
+
 if (document.URL.match(/\/albums/)) {
-
-  $(document).ready(function(){
-    $.getJSON('/api/albums.json', function(json) {
-      var $collection = $(".collection-container .row");
-      $collection.empty();
-
-      for (i = 0; i < json.albums.length; i++) {
-        var album = json.albums[i];
-        var $newThumbnail = buildAlbumThumbnail(album);
-        $collection.append($newThumbnail);
-      }
-    });
-  });
+  $(document).ready(intializeAlbumsView);
+  $(document).on('page:load', intializeAlbumsView);
 }
