@@ -21,7 +21,7 @@ var buildAlbumThumbnail = function(album) {
 
   var template =
       '<div class="collection-album-container col-md-2">'
-    + '  <div id="' + album.id + '" class="collection-album-image-container">'
+    + '  <div class="collection-album-image-container" data-album-id="' + album.id + '">'
     + '    <img src="/assets/album-placeholder.png"/>'
     + '  </div>'
     + '  <div class="caption album-collection-info">'
@@ -76,7 +76,7 @@ function intializeAlbumsView() {
       }
 
       var onHover = function() {
-        var id = $(this).attr('id');
+        var id = $(this).data('album-id');
         $(this).append(buildAlbumOverlay(id));
       };
 
@@ -90,4 +90,3 @@ function intializeAlbumsView() {
 }
 
 $(document).ready(intializeAlbumsView);
-$(document).on('page:load', intializeAlbumsView);

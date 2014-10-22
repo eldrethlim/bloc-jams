@@ -21,6 +21,6 @@ albums = Album.all
     album: albums.sample,
     title: Faker::Lorem.sentence(3),
     number: Faker::Number.digit,
-    duration: 100
+    duration: Faker::Number.number(2)
   )
 end
