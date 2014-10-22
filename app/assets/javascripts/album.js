@@ -1,3 +1,5 @@
+var currentlyPlayingSong = null;
+
 var createSongRow = function(song) {
   var template =
     '<tr>'
@@ -10,29 +12,34 @@ var createSongRow = function(song) {
 
    var onHover = function(event) {
     var songNumberCell = $(this).find('.song-number');
-    songNumberCell.html('<a class="album-song-button"><i class="fa fa-play"></i></a>')
+    var songNumber = songNumberCell.data('song-number');
+    if (songNumber !== currentlyPlayingSong) {
+      songNumberCell.html('<a class="album-song-button"><i class="fa fa-play"></i></a>');
+    }
    };
 
    var offHover = function(event) {
     var songNumberCell = $(this).find('.song-number');
     var songNumber = songNumberCell.data('song-number');
-    songNumberCell.html(songNumber);
+    if (songNumber !== currentlyPlayingSong) {
+        songNumberCell.html(songNumber);
+    }
    };
 
    var clickHandler = function(event) {
     var songNumber = $(this).data('song-number');
 
-    if ( a song is playing) {
+    if (currentlyPlayingSong != null) {
       var currentlyPlayingCell = $('.song-number[data-song-number="' + currentlyPlayingSong + '"]');
       currentlyPlayingCell.html(currentlyPlayingSong);
     }
 
-    if ( a non-playing song was clicked ) {
+    if (currentlyPlayingSong !== songNumber) {
       $(this).html('<a class="album-song-button"><i class="fa fa-pause"></i></a>');
       currentlyPlayingSong = songNumber;
     }
 
-    else if ( the playing song was clicked ) {
+    else if (currentlyPlayingSong === songNumber) {
       $(this).html('<a class="album-song-button"><i class="fa fa-play"></i></a>');
       currentlyPlayingSong = null;
     }
