@@ -10,7 +10,7 @@ var createSongRow = function(song) {
 
    var $row = $(template);
 
-   var onHover = function(event) {
+   var onHover = function() {
     var songNumberCell = $(this).find('.song-number');
     var songNumber = songNumberCell.data('song-number');
     if (songNumber !== currentlyPlayingSong) {
@@ -18,7 +18,7 @@ var createSongRow = function(song) {
     }
    };
 
-   var offHover = function(event) {
+   var offHover = function() {
     var songNumberCell = $(this).find('.song-number');
     var songNumber = songNumberCell.data('song-number');
     if (songNumber !== currentlyPlayingSong) {
@@ -26,7 +26,7 @@ var createSongRow = function(song) {
     }
    };
 
-   var clickHandler = function(event) {
+   var clickHandler = function() {
     var songNumber = $(this).data('song-number');
 
     if (currentlyPlayingSong != null) {

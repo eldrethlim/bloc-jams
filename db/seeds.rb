@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 require 'faker'
 
-15.times do
+20.times do
   Album.create!(
     title: Faker::Lorem.sentence(3),
     author: Faker::Name.name,
