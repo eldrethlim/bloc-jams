@@ -90,4 +90,3 @@ function intializeAlbumsView() {
 }
 
 $(document).ready(intializeAlbumsView);
-$(document).on('page:load', intializeAlbumsView);
