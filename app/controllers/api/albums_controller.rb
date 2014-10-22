@@ -2,7 +2,7 @@ class Api::AlbumsController < ApplicationController
   respond_to :json
 
   def index
-    albums = Album.order("created_at DESC")
+    albums = Album.order("created_at DESC").includes(:songs)
     render json: albums
   end
 
