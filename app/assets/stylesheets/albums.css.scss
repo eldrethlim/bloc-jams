@@ -47,8 +47,10 @@
   }
 
   .collection-overlay-button {
+    $strong-pink: #d2287b;
+
     font-size: 20px;
-    background-color: white;
+    background-color: $strong-pink;
     color: #d2287b;
     border-radius: 50% 50%;
     display: inline-block;
@@ -58,7 +60,7 @@
     &:hover {
       cursor: pointer;
       color: white;
-      background-color: #d2287b;
+      background-color: $strong-pink;
     }
 
     i {
