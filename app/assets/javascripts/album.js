@@ -1,11 +1,27 @@
 var currentlyPlayingSong = null;
 
+var convertTimeToMinutesAndSeconds = function(duration) {
+  
+  var minutes = Math.floor(duration/60);
+  var seconds = duration - minutes * 60;
+
+  if (seconds < 10) {
+    return minutes + ':0' + seconds;
+  }
+  else {
+    return minutes + ':' + seconds;
+  }
+};
+
 var createSongRow = function(song) {
+
+  var songDuration = convertTimeToMinutesAndSeconds(song.duration);
+
   var template =
     '<tr>'
    +' <td class="song-number col-md-1" data-song-number="' + song.number + '">' + song.number + '</td>'
    +' <td class="col-md-9">' + song.title + '</td>'
-   +' <td class="col-md-2">' + song.duration + '</td>'
+   +' <td class="col-md-2">' + songDuration + '</td>'
    +'</tr>';
 
    var $row = $(template);
@@ -72,9 +88,47 @@ var setAlbumView = function(album) {
     songs.forEach(createSongRows);
 };
 
+var updateSeekPercentage = function($seekBar, event) {
+  var barWidth = $seekBar.width();
+  var offsetX = event.pageX - $seekBar.offset().left;
+
+  var offsetXPercent = (offsetX / barWidth) * 100;
+  offsetXPercent = Math.max(0, offsetXPercent);
+  offsetXPercent = Math.min(100, offsetXPercent);
+
+  var percentageString = offsetXPercent + '%';
+  $seekBar.find('.fill').width(percentageString);
+  $seekBar.find('.thumb').css({left: percentageString});
+};
+
+var setupSeekBars = function() {
+  $seekBars = $('.player-bar .seek-bar');
+  $seekBars.click(function(event) {
+    updateSeekPercentage($(this), event);
+  });
+  
+  $seekBars.find('.thumb').mousedown(function(event) {
+    var $seekBar = $(this).parent();
+
+    $seekBar.addClass('no-animate');
+
+    $(document).on('mousemove.thumb', function(event) {
+      updateSeekPercentage($seekBar, event);
+    });
+
+    $(document).on('mouseup.thumb', function() {
+      $seekBar.removeClass('no-animate');
+
+      $(document).off('mousemove.thumb');
+      $(document).off('mouseup.thumb');
+    });
+  });
+};
+
 function intializeAlbumView() {
 
   if (document.URL.match(/\/albums\/\d+/)) {
+    setupSeekBars();
     var id = document.URL.split('/').slice(-1);
     $.getJSON('/api/albums/' + id + '.json', function(json) {
       setAlbumView(json.album);
