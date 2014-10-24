@@ -40,6 +40,7 @@ $hot-pink: #D2287B;
 .user-profile-tabs-container {
   margin: 42px auto 20px;
   text-align: center;
+
   .pagination.profile-pagination {
     font-weight: 700;
     border: $hot-pink 2px solid;
@@ -51,10 +52,16 @@ $hot-pink: #D2287B;
       color: white;
       letter-spacing: 2px;
     }
-
+  
     & > .active > a {
       background-color: $hot-pink;
       border-radius: 4px;
+    }
+
+    & > :not(.active) > a {
+      &:hover {
+        opacity: 0.7;
+      }
     }
   }
 }
