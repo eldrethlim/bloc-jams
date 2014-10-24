@@ -1,0 +1,23 @@
+.album-navigator-container {
+  position: fixed;
+  top: 45%;
+  width: 50px;
+  height: 280px;
+
+  &.next {
+    left: 200px;
+  }
+
+  &.previous {
+    right: 200px;
+  }
+
+  .album-link i {
+    opacity: 0.3;
+    transition: opacity 0.5s;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

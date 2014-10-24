@@ -41,9 +41,9 @@ p.css-after-test::after {
 }
 
 .album-song-button {
-  $base-center: center;
+  $base-alignment: center;
 
-  text-align: $base-center;
+  text-align: $base-alignment;
   font-size: 14px;
   background-color: white;
   color: #d2287b;
@@ -67,12 +67,12 @@ p.css-after-test::after {
   }
 
   td {
-    vertical-align: $base-center;
+    vertical-align: $base-alignment;
   }
 
   &.songnumber {
     padding: 0;
     height: 70px;
-    text-align: $base-center;
+    text-align: $base-alignment;
   }
 }

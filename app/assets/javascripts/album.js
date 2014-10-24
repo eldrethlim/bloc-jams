@@ -92,14 +92,14 @@ var setupAlbumNavigationButtons = function(album) {
   var nextAlbum = album.next_album_id;
   var previousAlbum = album.previous_album_id;
 
-  var $nextAlbumLink = $('.next-album-container');
-  var $previousAlbumLink = $('.previous-album-container');
+  var $nextAlbumLink = $('.album-navigator-container.next');
+  var $previousAlbumLink = $('.album-navigator-container.previous');
   
   if (nextAlbum != null) {
-    $nextAlbumLink.html('<a class="next-album" href="/albums/' + nextAlbum + '"><i class="fa fa-arrow-left fa-4x"></i></a>');
+    $nextAlbumLink.html('<a class="album-link" href="/albums/' + nextAlbum + '"><i class="fa fa-arrow-left fa-4x"></i></a>');
   }
   if (previousAlbum != null) {
-    $previousAlbumLink.html('<a class="previous-album" href="/albums/' + previousAlbum + '"><i class="fa fa-arrow-right fa-4x"></i></a>');
+    $previousAlbumLink.html('<a class="album-link" href="/albums/' + previousAlbum + '"><i class="fa fa-arrow-right fa-4x"></i></a>');
   }
 }
 
