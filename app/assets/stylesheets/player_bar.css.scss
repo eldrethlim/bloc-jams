@@ -9,6 +9,7 @@
 
   a {
     color: white;
+    transition: opacity 0.5s;
 
     &:hover {
       cursor: pointer;

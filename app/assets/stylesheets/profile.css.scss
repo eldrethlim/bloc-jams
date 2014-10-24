@@ -51,6 +51,7 @@ $hot-pink: #D2287B;
       background-color: transparent;
       color: white;
       letter-spacing: 2px;
+      transition: opacity 0.5s;
     }
   
     & > .active > a {
