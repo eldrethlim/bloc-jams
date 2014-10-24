@@ -1,0 +1,31 @@
+.next-album-container {
+  position: fixed;
+  top: 45%;
+  left: 200px;
+  width: 50px;
+  height: 280px;
+
+  .next-album i {
+    opacity: 0.3;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+.previous-album-container {
+  position: fixed;
+  top: 45%;
+  right: 200px;
+  width: 50px;
+  height: 280px;
+
+  .previous-album i {
+    opacity: 0.3;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

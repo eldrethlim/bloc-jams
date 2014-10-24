@@ -41,7 +41,7 @@ var buildAlbumThumbnail = function(album) {
  return $(template);
 };
 
-var buildAlbumOverlay = function(id) {
+var buildAlbumsOverlay = function(id) {
 
   var template =
     '<div class="collection-album-image-overlay">'
@@ -77,7 +77,7 @@ function intializeAlbumsView() {
 
       var onHover = function() {
         var id = $(this).data('album-id');
-        $(this).append(buildAlbumOverlay(id));
+        $(this).append(buildAlbumsOverlay(id));
       };
 
       var offHover = function() {

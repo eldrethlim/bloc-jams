@@ -88,6 +88,21 @@ var setAlbumView = function(album) {
     songs.forEach(createSongRows);
 };
 
+var setupAlbumNavigationButtons = function(album) {
+  var nextAlbum = album.next_album_id;
+  var previousAlbum = album.previous_album_id;
+
+  var $nextAlbumLink = $('.next-album-container');
+  var $previousAlbumLink = $('.previous-album-container');
+  
+  if (nextAlbum != null) {
+    $nextAlbumLink.html('<a class="next-album" href="/albums/' + nextAlbum + '"><i class="fa fa-arrow-left fa-4x"></i></a>');
+  }
+  if (previousAlbum != null) {
+    $previousAlbumLink.html('<a class="previous-album" href="/albums/' + previousAlbum + '"><i class="fa fa-arrow-right fa-4x"></i></a>');
+  }
+}
+
 var updateSeekPercentage = function($seekBar, event) {
   var barWidth = $seekBar.width();
   var offsetX = event.pageX - $seekBar.offset().left;
@@ -132,6 +147,7 @@ function intializeAlbumView() {
     var id = document.URL.split('/').slice(-1);
     $.getJSON('/api/albums/' + id + '.json', function(json) {
       setAlbumView(json.album);
+      setupAlbumNavigationButtons(json.album);
     });
   }
 }
