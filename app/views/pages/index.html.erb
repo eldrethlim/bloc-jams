@@ -2,8 +2,8 @@
 
 <div class='hero-content'>
   <div class='container'>
-    <h1 id>Bloc Jams</h1>
-    <h3 id>Turn the music up!</h3>
+    <h1 ng-click="titleTextClicked(albumURLs)">Bloc Jams</h1>
+    <h3 ng-click="subTextClicked()"> {{ subText }} </h3>
   </div>
 </div>
 
@@ -22,6 +22,14 @@
     <div class='point col-md-4'>
       <h5> Mobile enabled</h5>
       <p> Listen to your music on the go. This streaming service is available on all mobile platforms.</p>
+    </div>
+  </div>
+</div>
+
+<div class="landing-album-list container">
+  <div class="row">
+    <div class="col-md-4" ng-repeat="albumURL in albumURLs">
+      <img ng-src="{{albumURL}}">
     </div>
   </div>
 </div>

@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html ng-app='BlocJams'>
 <head>
   <title>Bloc Jams</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag "http://cdn.socket.io/socket.io-1.1.0.js" %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag 'http://cdn.socket.io/socket.io-1.1.0.js' %>
   <%= csrf_meta_tags %>
 </head>
-<body class="<%= yield (:body_class) %>">
+<body ng-controller='<%= yield(:body_class).capitalize %>Controller' class="<%= yield(:body_class) %>">
   <nav class='player-header-nav navbar'>
     <div class="container">
       <div class='navbar-header'>

@@ -1,10 +1,5 @@
 $(document).ready(function() {
 
-  var exclamationMark = function() {
-      subText = $(this).text();
-      $(this).text(subText + "!");
-  };
-
   var fadingHeader = function() {
     $(this).fadeOut("slow").fadeIn("slow");
   };
@@ -42,7 +37,6 @@ $(document).ready(function() {
 
   $('.selling-points .point').hover(raiseTopMargin, lowerTopMargin);
   $('.hero-content h3').hover(changeColorToPink, backToWhite);
-  $('.hero-content h3').click(exclamationMark);
   $('.selling-points .point').click(enlargeText);
   $('.hero-content h1').click(fadingHeader);
 });
