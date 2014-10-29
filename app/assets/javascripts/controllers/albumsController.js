@@ -1,4 +1,4 @@
-blocJams.controller('albumsController', ['$scope', '$http' , function($scope, $http) {
+blocJams.controller('albumsController', ['$scope', '$http', function($scope, $http) {
   $http.get('/api/albums.json').success(function(data) {
   
   var albums = data.albums;

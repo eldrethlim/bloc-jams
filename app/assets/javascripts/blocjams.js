@@ -15,4 +15,10 @@ blocJams.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', fu
     controller: 'albumsController',
     templateUrl: '/templates/albums.html'
   });
+
+  $stateProvider.state('song', {
+    url: '/song',
+    controller: 'songController',
+    templateUrl: '/templates/song.html'
+  });
 }]);
