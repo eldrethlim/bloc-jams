@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html ng-app='BlocJams'>
 <head>
+  <base href="/">
   <title>Bloc Jams</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= javascript_include_tag 'http://cdn.socket.io/socket.io-1.1.0.js' %>
   <%= csrf_meta_tags %>
 </head>
-<body ng-controller='<%= yield(:body_class).capitalize %>Controller' class="<%= yield(:body_class) %>">
+<body class="{{ bodyclass }}">
   <nav class='player-header-nav navbar'>
     <div class="container">
       <div class='navbar-header'>
-        <a class='logo navbar-left'>
+        <a class='logo navbar-left' ui-sref='landing'>
           <%= image_tag "blocjams.png" %>
         </a>
       </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a ui-sref='albums'>Library</a></li>
+      </ul>
     </div>
   </nav>
 

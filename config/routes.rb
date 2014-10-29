@@ -1,13 +1,12 @@
 Rails.application.routes.draw do
-  root to: 'pages#index'
-  get 'profile' => 'users#profile'
+  root to: 'home#index'
 
-  resources :albums do
-    resources :songs
-  end
+  get 'profile' => 'users#profile'
+  get '/templates/:path.html' => 'templates#template', :constraints => { :path => /.+/ }
 
   namespace :api do
     resources :albums
   end
   
+  get '*path' => 'home#index'
 end

@@ -1,27 +1,18 @@
- angular.module('BlocJams', []).controller('LandingController', ['$scope', function($scope) {
+var blocJams = angular.module('BlocJams', ['ui.router']);
 
-  $scope.titleText = "Bloc Jams!";
+blocJams.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', function($stateProvider, $locationProvider, $urlRouterProvider) {
+  $locationProvider.html5Mode(true);
+  $urlRouterProvider.otherwise('/');
 
-  $scope.subText = "Turn the music up!";
-  
-  $scope.subTextClicked = function() {
-    $scope.subText += '!';
-  };
+  $stateProvider.state('landing', {
+    url: '/',
+    controller: 'landingController',
+    templateUrl: '/templates/landing.html'
+  });
 
-  $scope.albumURLs = [
-   'assets/album-placeholders/album-1.jpg',
-   'assets/album-placeholders/album-2.jpg',
-   '/assets/album-placeholders/album-3.jpg',
-   '/assets/album-placeholders/album-4.jpg',
-   '/assets/album-placeholders/album-5.jpg',
-   '/assets/album-placeholders/album-6.jpg',
-   '/assets/album-placeholders/album-7.jpg',
-   '/assets/album-placeholders/album-8.jpg',
-   '/assets/album-placeholders/album-9.jpg',
-  ];
-
-  $scope.titleTextClicked = function(o){
-    for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
-    return o;
-  };
- }]);
+  $stateProvider.state('albums', {
+    url: '/albums',
+    controller: 'albumsController',
+    templateUrl: '/templates/albums.html'
+  });
+}]);
