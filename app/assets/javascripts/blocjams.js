@@ -6,14 +6,25 @@ blocJams.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', fu
 
   $stateProvider.state('landing', {
     url: '/',
-    controller: 'landingController',
-    templateUrl: '/templates/landing.html'
+    views: {
+      '': {
+        templateUrl: '/templates/landing.html',
+        controller: 'landingController'
+      }
+    }
   });
 
   $stateProvider.state('albums', {
     url: '/albums',
-    controller: 'albumsController',
-    templateUrl: '/templates/albums.html'
+    views : {
+      '': { 
+        templateUrl: '/templates/albums.html',
+        controller: 'albumsController' 
+      },
+      'albumsPlayerBar@albums': { 
+        templateUrl: '/templates/player_bar.html' 
+      }
+    }
   });
 
   $stateProvider.state('song', {
@@ -21,4 +32,17 @@ blocJams.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', fu
     controller: 'songController',
     templateUrl: '/templates/song.html'
   });
+
+  $stateProvider.state('album', {
+    url: '/album/:albumID',
+    views: {
+      '': {
+        templateUrl: '/templates/album.html',
+        controller: 'albumController'
+      },
+      'albumPlayerBar@album': {
+        templateUrl: '/templates/player_bar.html'
+      }
+    }
+  })
 }]);

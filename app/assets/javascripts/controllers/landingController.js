@@ -1,4 +1,5 @@
-blocJams.controller('landingController', ['$scope', function($scope) {
+blocJams.controller('landingController', ['$scope', '$rootScope', function($scope, $rootScope) {
+  $rootScope.bodyClass = 'landing';
 
   $scope.titleText = "Bloc Jams!";
 
@@ -9,8 +10,8 @@ blocJams.controller('landingController', ['$scope', function($scope) {
   };
 
   $scope.albumURLs = [
-   'assets/album-placeholders/album-1.jpg',
-   'assets/album-placeholders/album-2.jpg',
+   '/assets/album-placeholders/album-1.jpg',
+   '/assets/album-placeholders/album-2.jpg',
    '/assets/album-placeholders/album-3.jpg',
    '/assets/album-placeholders/album-4.jpg',
    '/assets/album-placeholders/album-5.jpg',

@@ -1,5 +1,5 @@
 class AlbumSerializer < ActiveModel::Serializer
-  attributes :id, :created_at, :title, :author, :description, :album_image_url, :previous_album_id, :next_album_id
+  attributes :id, :created_at, :title, :author, :description, :image, :previous_album_id, :next_album_id
 
   has_many :songs
 

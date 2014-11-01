@@ -2,10 +2,10 @@
   <div class="row"> <!-- Album Header -->
     <div ng-repeat="album in albums" class="collection-album-container col-md-2">
       <div ng-mouseenter="showOverlay = true" ng-mouseleave="showOverlay = false" class="collection-album-image-container">
-        <img ng-src="{{ album.album_image_url}}">
+        <img ng-src="{{ album.image}}">
         <div class="collection-album-image-overlay" ng-hide="!showOverlay">
           <div class="collection-overlay-content">
-            <a class="collection-overlay-button" ui-sref="album">
+            <a class="collection-overlay-button" ui-sref="album({ albumID: album.id })">
               <i class="fa fa-play"></i>
             </a>
             &nbsp;
@@ -18,7 +18,7 @@
 
       <div class="collection-album-info caption">
         <p>
-        <a class="album-name" ui-sref="album"> {{ album.title }} </a>
+        <a class="album-name" ui-sref="album({ albumID: album.id })"> {{ album.title }} </a>
           <br/>
           <a ui-sref="album"> {{ album.author }} </a>
           <br/>
@@ -29,4 +29,5 @@
       </div>
     </div>
   </div>
+  <div ui-view="albumsPlayerBar"></div>
 </div>
