@@ -30,6 +30,10 @@
 .table.album-song-listing {
   font-weight: 300;
 
+  tr.red {
+    color: pink;
+  }
+
   td {
     padding: 20px;
     border-top: 1px solid rgba(255, 255, 255, .4);
