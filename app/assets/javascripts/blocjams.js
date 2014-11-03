@@ -22,7 +22,8 @@ blocJams.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', fu
         controller: 'albumsController' 
       },
       'albumsPlayerBar@albums': { 
-        templateUrl: '/templates/player_bar.html' 
+        templateUrl: '/templates/player_bar.html',
+        controller: 'playerBarController' 
       }
     }
   });
@@ -41,8 +42,37 @@ blocJams.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', fu
         controller: 'albumController'
       },
       'albumPlayerBar@album': {
-        templateUrl: '/templates/player_bar.html'
+        templateUrl: '/templates/player_bar.html',
+        controller: 'playerBarController'
       }
     }
   })
 }]);
+
+
+blocJams.service('songPlayer', function() {
+  return {
+    currentSong: null,
+    currentAlbum: null,
+    playing: false,
+
+    play: function() {
+      this.playing = true;
+    },
+    pause: function () {
+      this.playing = false;
+    },
+    setSong: function(album, song) {
+      this.currentAlbum = album;
+      this.currentSong = song;
+    }
+  };
+});
+
+blocJams.service('consoleLogger', function() {
+  return {
+    logThis: function(logger) {
+      console.log(logger);
+    }
+  }
+})

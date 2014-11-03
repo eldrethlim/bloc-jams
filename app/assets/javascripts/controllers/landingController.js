@@ -1,5 +1,16 @@
-blocJams.controller('landingController', ['$scope', '$rootScope', function($scope, $rootScope) {
+blocJams.controller('landingController', ['$scope', '$rootScope', '$http', function($scope, $rootScope, $http) {
+
   $rootScope.bodyClass = 'landing';
+  
+  $http.get('/api/albums.json').success(function(data){
+    var albums = data.albums;
+    var latestAlbums = [];
+
+    for (var a = 0; a < 9; a++) {
+      latestAlbums.push(albums[a]);
+    }
+    $scope.latestAlbums = latestAlbums;
+  });
 
   $scope.titleText = "Bloc Jams!";
 
@@ -8,18 +19,6 @@ blocJams.controller('landingController', ['$scope', '$rootScope', function($scop
   $scope.subTextClicked = function() {
     $scope.subText += '!';
   };
-
-  $scope.albumURLs = [
-   '/assets/album-placeholders/album-1.jpg',
-   '/assets/album-placeholders/album-2.jpg',
-   '/assets/album-placeholders/album-3.jpg',
-   '/assets/album-placeholders/album-4.jpg',
-   '/assets/album-placeholders/album-5.jpg',
-   '/assets/album-placeholders/album-6.jpg',
-   '/assets/album-placeholders/album-7.jpg',
-   '/assets/album-placeholders/album-8.jpg',
-   '/assets/album-placeholders/album-9.jpg',
-  ];
 
   $scope.shuffle = function(o){
     for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);

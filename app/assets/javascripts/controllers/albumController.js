@@ -1,6 +1,10 @@
-blocJams.controller('albumController', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
+blocJams.controller('albumController', ['$scope', '$http', '$stateParams', 'songPlayer', '$rootScope', 'consoleLogger', function($scope, $http, $stateParams, songPlayer, $rootScope, consoleLogger) {
   $http.get('/api/albums/' + $stateParams.albumID + '.json').success(function(data) {
     
+    consoleLogger.logThis("Hello World 1!");
+
+    $rootScope.bodyClass = null;
+
     var album = data.album;
     
     $scope.album = album;
@@ -17,7 +21,7 @@ blocJams.controller('albumController', ['$scope', '$http', '$stateParams', funct
     };
 
     $scope.getSongState = function(song) {
-      if (song === playingSong) {
+      if (song === songPlayer.currentSong && songPlayer.playing) {
         return 'playing';
       }
       else if (song === hoveredSong) {
@@ -27,11 +31,12 @@ blocJams.controller('albumController', ['$scope', '$http', '$stateParams', funct
     }
 
     $scope.playSong = function(song) {
-      playingSong = song;
+      songPlayer.setSong($scope.album, song);
+      songPlayer.play();
     };
 
     $scope.pauseSong = function(song) {
-      playingSong = null;
+      songPlayer.pause();
     };
 
     $scope.isOdd = function(song) {
