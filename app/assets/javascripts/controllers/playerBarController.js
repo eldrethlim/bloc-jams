@@ -1,4 +1,3 @@
-blocJams.controller('playerBarController', ['$scope', 'songPlayer', 'consoleLogger', function($scope, songPlayer, consoleLogger){
+blocJams.controller('playerBarController', ['$scope', 'songPlayer', function($scope, songPlayer){
   $scope.songPlayer = songPlayer;
-      consoleLogger.logThis("Hello World 2!");
 }]);

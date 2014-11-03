@@ -1,7 +1,5 @@
-blocJams.controller('albumController', ['$scope', '$http', '$stateParams', 'songPlayer', '$rootScope', 'consoleLogger', function($scope, $http, $stateParams, songPlayer, $rootScope, consoleLogger) {
+blocJams.controller('albumController', ['$scope', '$http', '$stateParams', 'songPlayer', '$rootScope', function($scope, $http, $stateParams, songPlayer, $rootScope) {
   $http.get('/api/albums/' + $stateParams.albumID + '.json').success(function(data) {
-    
-    consoleLogger.logThis("Hello World 1!");
 
     $rootScope.bodyClass = null;
 
