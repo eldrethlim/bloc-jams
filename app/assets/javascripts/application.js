@@ -16,4 +16,5 @@
 //= reuqire lib/angular-resource
 //= require lib/angular-ui-router
 //= require bootstrap-sprockets
+//= require lib/buzz
 //= require_tree .

@@ -30,7 +30,6 @@ blocJams.controller('albumController', ['$scope', '$http', '$stateParams', 'song
 
     $scope.playSong = function(song) {
       songPlayer.setSong($scope.album, song);
-      songPlayer.play();
     };
 
     $scope.pauseSong = function(song) {

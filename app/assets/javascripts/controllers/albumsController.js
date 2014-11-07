@@ -1,4 +1,4 @@
-blocJams.controller('albumsController', ['$scope', '$http', '$rootScope', function($scope, $http, $rootScope) {
+blocJams.controller('albumsController', ['$scope', '$http', '$rootScope', 'songPlayer', function($scope, $http, $rootScope, songPlayer) {
   $http.get('/api/albums.json').success(function(data) {
 
     $rootScope.bodyClass = null;
@@ -29,5 +29,9 @@ blocJams.controller('albumsController', ['$scope', '$http', '$rootScope', functi
     }
 
     $scope.albums = albums;
+
+    $scope.playAlbum = function(album) {
+      songPlayer.setSong(album, album.songs[0]);
+    }
   });
 }]);
