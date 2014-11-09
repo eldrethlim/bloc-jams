@@ -1,37 +1,28 @@
-blocJams.controller('albumsController', ['$scope', '$http', '$rootScope', 'songPlayer', function($scope, $http, $rootScope, songPlayer) {
-  $http.get('/api/albums.json').success(function(data) {
+blocJams.controller('albumsController', ['$scope', '$http', '$rootScope', 'songPlayer', 'songDurationConverter', 'albumsData', function($scope, $http, $rootScope, songPlayer, songDurationConverter, albumsData) {
 
-    $rootScope.bodyClass = null;
-  
-    var albums = data.albums;
+  var albums = albumsData.albums;
 
-    var countTotalTime = function(songs) {
-      var total = 0;
-      
-      songs.forEach(function (element) {
-        total += element.duration;
-      });
-      var minutes = Math.floor(total/60);
-      var seconds = total - minutes * 60;
+  $rootScope.bodyClass = null;
 
-      if (seconds < 10) {
-        return minutes + ':0' + seconds;
-      }
-      else {
-        return minutes + ':' + seconds;
-      }
-    };
+  var countTotalTime = function(songs) {
+    var total = 0;
 
-    var albumSongTimes = [];
+    songs.forEach(function(element) {
+      total += element.duration;
+    });
 
-    for (var i = 0; i < albums.length; i++) {
-      albums[i].totalSongTime = countTotalTime(albums[i].songs);
-    }
+    return songDurationConverter.convertToMinutesAndSeconds(total);
+  }
 
-    $scope.albums = albums;
+  var albumSongTimes = [];
 
-    $scope.playAlbum = function(album) {
-      songPlayer.setSong(album, album.songs[0]);
-    }
-  });
+  for (var i = 0; i < albums.length; i++) {
+    albums[i].totalSongTime = countTotalTime(albums[i].songs);
+  }
+
+  $scope.albums = albums;
+
+  $scope.playAlbum = function(album) {
+    songPlayer.setSong(album, album.songs[0]);
+  }
 }]);

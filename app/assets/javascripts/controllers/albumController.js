@@ -1,9 +1,19 @@
-blocJams.controller('albumController', ['$scope', '$http', '$stateParams', 'songPlayer', '$rootScope', function($scope, $http, $stateParams, songPlayer, $rootScope) {
+blocJams.controller('albumController', ['$scope', '$http', '$stateParams', 'songPlayer', '$rootScope', 'songDurationConverter', function($scope, $http, $stateParams, songPlayer, $rootScope, songDurationConverter) {
   $http.get('/api/albums/' + $stateParams.albumID + '.json').success(function(data) {
 
     $rootScope.bodyClass = null;
 
     var album = data.album;
+    var songs = album.songs;
+    console.log(album.songs);
+
+    var convertSongDuration = function(duration) {
+      return songDurationConverter.convertToMinutesAndSeconds(duration)
+    }
+
+    for (var x = 0; x < songs.length; x++) {
+      songs[x].convertedDuration = convertSongDuration(songs[x].duration)
+    }
     
     $scope.album = album;
 

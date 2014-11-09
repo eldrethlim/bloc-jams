@@ -1,5 +1,7 @@
-<div class='player-bar'>
+<div class='player-bar' ng-show="songPlayer.revealBar">
+  
   <div class='container'>
+    
     <div class='play-controls player-bar-control-group left-controls'>
       <a class='previous' ng-click="songPlayer.previous()">
         <i class='fa fa-backward'></i>
@@ -12,31 +14,39 @@
         <i class='fa fa-forward'></i>
       </a>
     </div>
+    
     <div class='currently-playing player-bar-control-group'>
       <h2 class='song-name'> {{ songPlayer.currentSong.title }}</h2>
+      
       <div class='seek-control'>
-        <div class='seek-bar'>
-          <div class='fill'></div>
-          <div class='thumb'></div>
-        </div>
+        <slider></slider>
+        
         <div class='current-time'> {{ songPlayer.playTime }}</div>
-        <div class='total-time'> {{ songPlayer.currentSong.duration }} </div>
+        
+        <div class='total-time'> {{ songPlayer.currentSong.convertedDuration }} </div>
       </div>
       <h3 class='artist-name'> {{ songPlayer.currentAlbum.author }} </h3>
     </div>
+    
     <div class='right-controls player-bar-control-group'>
+      
       <div class='volume'>
         <i class='fa fa-volume-up'></i>
-        <div class='seek-bar'>
-          <div class='fill'></div>
-          <div class='thumb'></div>
-        </div>
+        <slider></slider>
       </div>
+      
       <div class='queue-toggle'>
         <a>
-          <i class='fa fa-list-ul'></i>
+          <ul>
+            <li><i class='fa fa-times' ng-click="songPlayer.stopSongAndClosePlayerBar()"></i></li>
+            <br>
+            <li><i class='fa fa-list-ul'></i></li>
+          </ul>
         </a>
       </div>
+
     </div>
+
   </div>
+
 </div>
