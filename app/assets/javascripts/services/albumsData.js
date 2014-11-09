@@ -4,7 +4,5 @@ blocJams.service('albumsData', function($http, $cacheFactory) {
   $http.get('/api/albums.json', {
     cache: albumsCache
   });
-
-  debugger;
   console.log(albumsCache);
 });
