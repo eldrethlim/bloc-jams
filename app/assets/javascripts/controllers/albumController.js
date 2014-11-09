@@ -5,8 +5,7 @@ blocJams.controller('albumController', ['$scope', '$http', '$stateParams', 'song
 
     var album = data.album;
     var songs = album.songs;
-    console.log(album.songs);
-
+    
     var convertSongDuration = function(duration) {
       return songDurationConverter.convertToMinutesAndSeconds(duration)
     }
