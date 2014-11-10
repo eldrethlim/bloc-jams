@@ -1,4 +1,4 @@
-blocJams.service('songPlayer', function() {
+blocJams.service('songPlayer', ['$rootScope', function($rootScope) {
   var currentSoundFile = null;
   var trackIndex = function(album,song) {
     return album.songs.indexOf(song);
@@ -47,6 +47,16 @@ blocJams.service('songPlayer', function() {
       this.setSong(this.currentAlbum, song)
     },
 
+    seek: function(time) {
+      if (currentSoundFile) {
+        currentSoundFile.setTime(time);
+      }
+    },
+
+    onTimeUpdate: function(callback) {
+      return $rootScope.$on('sound:timeupdate', callback);
+    },
+
     setSong: function(album, song) {
       if (currentSoundFile) {
         currentSoundFile.stop();
@@ -58,7 +68,11 @@ blocJams.service('songPlayer', function() {
         preload: true
       });
 
+      currentSoundFile.bind('timeupdate', function(e) {
+        $rootScope.$broadcast('sound:timeupdate', this.getTime());
+      });
+
       this.play();
     }
   };
-});
+}]);

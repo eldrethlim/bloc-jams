@@ -9,21 +9,56 @@ blocJams.directive('slider', ['$document', function($document) {
     return offsetXPercent;
   }
 
+  var numberFromValue = function(value, defaultValue) {
+    if (typeof value === 'number') {
+      return value;
+    }
+
+    if (typeof value === 'undefined') {
+      return defaultValue;
+    }
+
+    if (typeof value === 'string') {
+      return Number(value);
+    }
+  }
+
   return {
     templateUrl: '/templates/directives/slider.html',
     replace: true,
     restrict: 'E',
-    scope: {},
+    scope: {
+      onChange: '&'
+    },
 
     link: function(scope, element, attributes) {
       scope.value = 0;
-      scope.max = 200;
+      scope.max = 100;
       var $seekBar = $(element);
+      console.log(attributes);
+      console.log(scope);
+      console.log(element);
+
+      attributes.$observe('value', function(newValue) {
+        scope.value = numberFromValue(newValue, 0);
+      });
+
+      attributes.$observe('max', function(newValue) {
+        scope.max = numberFromValue(newValue, 100) || 100
+      });
 
       var percentString = function() {
-        percent = Number(scope.value) / Number(scope.max) * 100;
+        var value = scope.value || 0;
+        var max = scope.max || 100;
+        percent = value / max * 100;
         return percent + "%";
       }
+
+      var notifyCallback = function(newValue) {
+        if (typeof scope.onChange === 'function') {
+          scope.onChange({value: newValue});
+        }
+      };
 
       scope.fillStyle = function() {
         return { width: percentString() };
@@ -36,6 +71,7 @@ blocJams.directive('slider', ['$document', function($document) {
       scope.onclickSlider = function(event) {
         var percent = calculateSliderPercentFromMouseEvent($seekBar, event);
         scope.value = percent * scope.max;
+        notifyCallback(scope.value);
       }
 
       scope.trackThumb = function () {
@@ -43,6 +79,7 @@ blocJams.directive('slider', ['$document', function($document) {
           var percent = calculateSliderPercentFromMouseEvent($seekBar, event);
           scope.$apply(function() {
             scope.value = percent * scope.max;
+            notifyCallback(scope.value);
           });
         });
 

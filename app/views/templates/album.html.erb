@@ -37,7 +37,7 @@
           </span>
         </td>
         <td class="col-md-9"> {{ song.title }} </td>
-        <td class="col-md-2"> {{ song.convertedDuration }} </td>
+        <td class="col-md-2"> {{ song.duration | timecode }} </td>
     </table>
   </div>
   <div ui-view="albumPlayerBar"></div>
