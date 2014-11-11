@@ -1,28 +1,30 @@
-blocJams.controller('albumsController', ['$scope', '$http', '$rootScope', 'songPlayer', 'songDurationConverter', 'albumsData', function($scope, $http, $rootScope, songPlayer, songDurationConverter, albumsData) {
+blocJams.controller('albumsController', ['$scope', '$http', '$rootScope', 'SongPlayer', 'Api', function($scope, $http, $rootScope, SongPlayer, Api) {
 
-  var albums = albumsData.albums;
+  Api.albums.then(function (albums) {
 
-  $rootScope.bodyClass = null;
+    $rootScope.bodyClass = null;
 
-  var countTotalTime = function(songs) {
-    var total = 0;
+    var countTotalTime = function(songs) {
+      var total = 0;
 
-    songs.forEach(function(element) {
-      total += element.duration;
-    });
+      songs.forEach(function(element) {
+        total += element.duration;
+      });
 
-    return songDurationConverter.convertToMinutesAndSeconds(total);
-  }
+      return total;
+    }
 
-  var albumSongTimes = [];
+    var albumSongTimes = [];
 
-  for (var i = 0; i < albums.length; i++) {
-    albums[i].totalSongTime = countTotalTime(albums[i].songs);
-  }
+    for (var i = 0; i < albums.length; i++) {
+      albums[i].totalSongTime = countTotalTime(albums[i].songs);
+    }
 
-  $scope.albums = albums;
+    $scope.albums = albums;
 
-  $scope.playAlbum = function(album) {
-    songPlayer.setSong(album, album.songs[0]);
-  }
+    $scope.playAlbum = function(album) {
+      SongPlayer.setSong(album, album.songs[0]);
+    }
+  });
 }]);
+

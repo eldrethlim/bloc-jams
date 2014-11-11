@@ -1,9 +1,8 @@
-blocJams.controller('landingController', ['$scope', '$rootScope', '$http', function($scope, $rootScope, $http) {
+blocJams.controller('landingController', ['$scope', '$rootScope', 'Api', function($scope, $rootScope, Api) {
 
   $rootScope.bodyClass = 'landing';
   
-  $http.get('/api/albums.json').success(function(data){
-    var albums = data.albums;
+  Api.albums.then(function (albums) {
     var latestAlbums = [];
 
     for (var a = 0; a < 9; a++) {

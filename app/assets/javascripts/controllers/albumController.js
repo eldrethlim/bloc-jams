@@ -1,18 +1,19 @@
-blocJams.controller('albumController', ['$scope', '$http', '$stateParams', 'songPlayer', '$rootScope', 'songDurationConverter', function($scope, $http, $stateParams, songPlayer, $rootScope, songDurationConverter) {
-  $http.get('/api/albums/' + $stateParams.albumID + '.json').success(function(data) {
+blocJams.controller('albumController', ['$scope', 'Api', '$stateParams', 'SongPlayer', '$rootScope', function($scope, Api, $stateParams, SongPlayer, $rootScope) {
+
+  Api.albums.then(function (albums) {
 
     $rootScope.bodyClass = null;
-
-    var album = data.album;
-    var songs = album.songs;
+    var id = $stateParams.albumID
     
-    var convertSongDuration = function(duration) {
-      return songDurationConverter.convertToMinutesAndSeconds(duration)
+    var findAlbum = function(albums, id) {
+      for (x = 0; x < albums.length; x++) {
+        if (albums[x].id == id) {
+          return albums[x];
+        }
+      }
     }
 
-    for (var x = 0; x < songs.length; x++) {
-      songs[x].convertedDuration = convertSongDuration(songs[x].duration)
-    }
+    var album = findAlbum(albums, id);
     
     $scope.album = album;
 
@@ -28,7 +29,7 @@ blocJams.controller('albumController', ['$scope', '$http', '$stateParams', 'song
     };
 
     $scope.getSongState = function(song) {
-      if (song === songPlayer.currentSong && songPlayer.playing) {
+      if (song === SongPlayer.currentSong && SongPlayer.playing) {
         return 'playing';
       }
       else if (song === hoveredSong) {
@@ -38,11 +39,11 @@ blocJams.controller('albumController', ['$scope', '$http', '$stateParams', 'song
     }
 
     $scope.playSong = function(song) {
-      songPlayer.setSong($scope.album, song);
+      SongPlayer.setSong($scope.album, song);
     };
 
     $scope.pauseSong = function(song) {
-      songPlayer.pause();
+      SongPlayer.pause();
     };
 
     $scope.isOdd = function(song) {

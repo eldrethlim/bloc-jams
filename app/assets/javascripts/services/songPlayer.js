@@ -1,4 +1,4 @@
-blocJams.service('songPlayer', ['$rootScope', function($rootScope) {
+blocJams.service('SongPlayer', ['$rootScope', function($rootScope) {
   var currentSoundFile = null;
   var trackIndex = function(album,song) {
     return album.songs.indexOf(song);
@@ -9,6 +9,7 @@ blocJams.service('songPlayer', ['$rootScope', function($rootScope) {
     revealBar: false,
     currentAlbum: null,
     playing: false,
+    volume: 90,
 
     play: function() {
       this.playing = true;
@@ -57,6 +58,13 @@ blocJams.service('songPlayer', ['$rootScope', function($rootScope) {
       return $rootScope.$on('sound:timeupdate', callback);
     },
 
+    setVolume: function(volume) {
+      if (currentSoundFile) {
+        currentSoundFile.setVolume(volume);
+      }
+      this.volume = volume;
+    },
+
     setSong: function(album, song) {
       if (currentSoundFile) {
         currentSoundFile.stop();
@@ -67,6 +75,7 @@ blocJams.service('songPlayer', ['$rootScope', function($rootScope) {
         formats: ["mp3"],
         preload: true
       });
+      currentSoundFile.setVolume(this.volume);
 
       currentSoundFile.bind('timeupdate', function(e) {
         $rootScope.$broadcast('sound:timeupdate', this.getTime());

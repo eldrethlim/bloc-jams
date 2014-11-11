@@ -35,10 +35,7 @@ blocJams.directive('slider', ['$document', function($document) {
       scope.value = 0;
       scope.max = 100;
       var $seekBar = $(element);
-      console.log(attributes);
-      console.log(scope);
-      console.log(element);
-
+      
       attributes.$observe('value', function(newValue) {
         scope.value = numberFromValue(newValue, 0);
       });
@@ -68,7 +65,7 @@ blocJams.directive('slider', ['$document', function($document) {
         return { left: percentString() };
       }
 
-      scope.onclickSlider = function(event) {
+      scope.onClickSlider = function(event) {
         var percent = calculateSliderPercentFromMouseEvent($seekBar, event);
         scope.value = percent * scope.max;
         notifyCallback(scope.value);

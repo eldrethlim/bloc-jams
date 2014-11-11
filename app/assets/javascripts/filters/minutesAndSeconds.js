@@ -1,8 +1,8 @@
-blocJams.filter('timecode', function(){
+blocJams.filter('minutesAndSeconds', function(){
   return function(seconds) {
     seconds = Number.parseFloat(seconds);
 
-    if (Number.isNan(seconds)) {
+    if (Number.isNaN(seconds)) {
       return '-:--';
     }
 
