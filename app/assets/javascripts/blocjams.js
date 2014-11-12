@@ -28,10 +28,16 @@ blocJams.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', fu
     }
   });
 
+  $stateProvider.state('profile', {
+    url: '/profile',
+    templateUrl: '/templates/profile.html',
+    controller: 'profileController'
+  });
+  
   $stateProvider.state('song', {
     url: '/song',
-    controller: 'songController',
-    templateUrl: '/templates/song.html'
+    templateUrl: '/templates/song.html',
+    controller: 'songController'
   });
 
   $stateProvider.state('album', {
