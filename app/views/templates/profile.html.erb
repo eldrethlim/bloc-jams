@@ -2,15 +2,15 @@
   <div>
     <div class="user-profile-tabs-container">
       <ul class="profile-pagination pagination tabs">
-        <li class="tab ng-class: { active: selectedTab === 'account'}">
+        <li class="tab" ng-class= "{ active: selectedTab === 'account'}">
           <a href ng-click="selectedTab = 'account'">Your Account</a>
         </li>
-        <li class="tab ng-class: { active: selectedTab === 'subscription'}">
+        <li class="tab" ng-class= "{ active: selectedTab === 'subscription'}">
           <a href ng-click="selectedTab = 'subscription'">Subscription</a>
         </li>
       </ul>
     </div>
-
+    
     <div class="user-account tab-pane" id="yourAccountTab" ng-show="selectedTab == 'account'">
       <div class="page-header user-profile-header">Personal Information</div>
       <div class="row">

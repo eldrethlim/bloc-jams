@@ -18,7 +18,7 @@
         <td class="no-lines col-md-9"> Title </td>
         <td class="no-lines col-md-2"> Length </td>
       </tr>
-      <tr ng-class="{red: isOdd(song)}" ng-repeat="song in album.songs" ng-mouseenter="onHoverSong(song)" ng-mouseleave="offHoverSong(song)">
+      <tr ng-class="{red: isOdd(song)}" ng-repeat="song in album.songs | sortObjectsBy:'number'" ng-mouseenter="onHoverSong(song)" ng-mouseleave="offHoverSong(song)">
         <td class="song-number col-md-1">
           <span ng-switch="getSongState(song)">
             <span ng-switch-when="playing">
