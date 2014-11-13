@@ -29,11 +29,9 @@ blocJams.directive('slider', ['$document', function($document) {
     restrict: 'E',
     scope: {
       onChange: '&',
-      foo: '@'
     },
 
     link: function(scope, element, attributes) {
-      console.log(scope.foo);
       scope.value = 0;
       scope.max = 100;
       var $seekBar = $(element);
